@@ -1,9 +1,20 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import { InferGetStaticPropsType } from 'next';
 import Layout, { siteTitle } from '@components/layout';
-import { HeadingMd } from '@styles/utils';
+import { HeadingLg, HeadingMd, List, ListItem } from '@styles/utils';
+import { getSortedPostsData } from '@lib/posts';
 
-const Home = () => {
+export async function getStaticProps() {
+	const allPostsData = getSortedPostsData();
+	return {
+		props: {
+			allPostsData,
+		},
+	};
+}
+
+const Home = ({ allPostsData }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (
 		<Layout home>
 			<Head>
@@ -20,6 +31,20 @@ const Home = () => {
 					</Link>
 					)
 				</p>
+			</HeadingMd>
+			<HeadingMd as='section'>
+				<HeadingLg>Blog</HeadingLg>
+				<List as='ul'>
+					{allPostsData.map(({ id, date, title }) => (
+						<ListItem as='li' key={id}>
+							{title}
+							<br />
+							{id}
+							<br />
+							{date}
+						</ListItem>
+					))}
+				</List>
 			</HeadingMd>
 		</Layout>
 	);
