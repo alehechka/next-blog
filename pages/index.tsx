@@ -1,19 +1,19 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { InferGetStaticPropsType } from 'next';
+import { InferGetStaticPropsType, GetStaticProps } from 'next';
 import Layout, { siteTitle } from '@components/layout';
 import Date from '@components/date';
 import { HeadingLg, HeadingMd, LightText, List, ListItem } from '@styles/utils';
 import { getSortedPostsData } from '@lib/posts';
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
 	const allPostsData = getSortedPostsData();
 	return {
 		props: {
 			allPostsData,
 		},
 	};
-}
+};
 
 const Home = ({ allPostsData }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (

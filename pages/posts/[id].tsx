@@ -2,25 +2,25 @@ import Date from '@components/date';
 import Layout from '@components/layout';
 import { getAllPostIds, getPostData } from '@lib/posts';
 import { HeadingXl, LightText } from '@styles/utils';
-import { InferGetStaticPropsType } from 'next';
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
 	const paths = getAllPostIds();
 	return {
 		paths,
 		fallback: false,
 	};
-}
+};
 
-export async function getStaticProps({ params }) {
-	const postData = await getPostData(params.id);
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+	const postData = await getPostData(params.id as string);
 	return {
 		props: {
 			postData,
 		},
 	};
-}
+};
 
 const Post = ({ postData }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (
