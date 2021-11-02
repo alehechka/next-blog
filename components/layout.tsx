@@ -40,7 +40,7 @@ const Layout: FC<LayoutProps> = ({ children, home }) => {
 							</a>
 						</Link>
 						<HeadingLg>
-							<Link href='/'>
+							<Link href='/' passHref>
 								<ColorInherit as='a'>{name}</ColorInherit>
 							</Link>
 						</HeadingLg>

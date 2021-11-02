@@ -23,7 +23,7 @@ const Home = ({ allPostsData }: InferGetStaticPropsType<typeof getStaticProps>) 
 			</Head>
 			<HeadingMd as='section'>
 				<p>
-					Hello, I'm <b>Adam</b>. I'm a software engineer and recent graduate at UNO.
+					Hello, I&apos;m <b>Adam</b>. I&apos;m a software engineer and recent graduate at UNO.
 				</p>
 			</HeadingMd>
 			<HeadingMd as='section'>
