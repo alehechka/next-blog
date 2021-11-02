@@ -2,7 +2,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { InferGetStaticPropsType } from 'next';
 import Layout, { siteTitle } from '@components/layout';
-import { HeadingLg, HeadingMd, List, ListItem } from '@styles/utils';
+import Date from '@components/date';
+import { HeadingLg, HeadingMd, LightText, List, ListItem } from '@styles/utils';
 import { getSortedPostsData } from '@lib/posts';
 
 export async function getStaticProps() {
@@ -24,24 +25,19 @@ const Home = ({ allPostsData }: InferGetStaticPropsType<typeof getStaticProps>) 
 				<p>
 					Hello, I'm <b>Adam</b>. I'm a software engineer and recent graduate at UNO.
 				</p>
-				<p>
-					(Check out the first post here:{' '}
-					<Link href='/posts/first-post'>
-						<a>First Post</a>
-					</Link>
-					)
-				</p>
 			</HeadingMd>
 			<HeadingMd as='section'>
 				<HeadingLg>Blog</HeadingLg>
 				<List as='ul'>
 					{allPostsData.map(({ id, date, title }) => (
 						<ListItem as='li' key={id}>
-							{title}
+							<Link href={`/posts/${id}`}>
+								<a>{title}</a>
+							</Link>
 							<br />
-							{id}
-							<br />
-							{date}
+							<LightText as='small'>
+								<Date dateString={date} />
+							</LightText>
 						</ListItem>
 					))}
 				</List>
